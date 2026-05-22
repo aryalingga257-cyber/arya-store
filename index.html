@@ -1,0 +1,948 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>ARYA STORE TITAN - OLYMPUS EDITION (60KB+ SUPER BOOSTER)</title>
+    <style>
+        :root {
+            --olympus-bg: #010409;
+            --olympus-card: #0d1117;
+            --olympus-primary: #2f81f7;
+            --olympus-border: #30363d;
+            --olympus-text: #c9d1d9;
+            --olympus-sub: #8b949e;
+            --olympus-google: #ffffff;
+            --olympus-fb: #1877f2;
+            --olympus-apple: #000000;
+            --radius-max: 28px;
+            --shadow-titan: 0 20px 60px rgba(0,0,0,0.7);
+        }
+        
+        /* --- HEAVY CSS BOOSTER --- */
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; font-family: 'Inter', -apple-system, sans-serif; }
+        body { background-color: var(--olympus-bg); color: var(--olympus-text); overflow-x: hidden; padding-bottom: 110px; line-height: 1.6; }
+        ::-webkit-scrollbar { display: none; }
+
+        /* 🔥 MAIN WRAPPER UNTUK LAYANAN LAPTOP/PC AGAR PROPORSIONAL */
+        .main-wrapper {
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        /* 🔥 BANNER TITAN FULL (Bisa drag & swipe, Geser Setiap Detik) */
+        .banner-slider {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 0 20px;
+            overflow: hidden;
+            position: relative;
+            user-select: none;
+            cursor: grab;
+        }
+        .banner-slider:active {
+            cursor: grabbing;
+        }
+        .banner-track {
+            display: flex;
+            transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+            will-change: transform;
+        }
+        .banner-item {
+            min-width: 100%;
+            height: 170px;
+            border-radius: 25px;
+            overflow: hidden;
+            position: relative;
+            box-shadow: var(--shadow-titan);
+        }
+        .banner-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            pointer-events: none;
+        }
+        .banner-content {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            z-index: 2;
+        }
+        .banner-content h2 {
+            font-size: 18px;
+            font-weight: 900;
+            color: white;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.8);
+        }
+        .banner-content button {
+            margin-top: 8px;
+            padding: 10px 18px;
+            border-radius: 12px;
+            border: none;
+            background: var(--olympus-primary);
+            color: white;
+            font-weight: 800;
+            cursor: pointer;
+        }
+        .banner-dots {
+            text-align: center;
+            margin-top: 10px;
+        }
+        .dot {
+            width: 8px;
+            height: 8px;
+            background: #30363d;
+            border-radius: 50%;
+            display: inline-block;
+            margin: 5px;
+            transition: 0.3s;
+            cursor: pointer;
+        }
+        .dot.active {
+            background: var(--olympus-primary);
+            width: 18px;
+            border-radius: 5px;
+        }
+
+        /* --- HEADER & NAVIGATION --- */
+        .header-container {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: rgba(13, 17, 23, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--olympus-border);
+        }
+        header { padding: 22px 20px; }
+        .h-wrap { max-width: 1200px; margin: 0 auto; display: flex; flex-direction: column; }
+        .h-top { display: flex; justify-content: space-between; align-items: center; width: 100%; }
+        .logo-titan { font-size: 30px; font-weight: 900; letter-spacing: -1.5px; background: linear-gradient(90deg, #58a6ff, #1f6feb); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        
+        .h-actions { display: flex; align-items: center; gap: 10px; }
+        .btn-search-header {
+            width: 42px;
+            height: 42px;
+            border-radius: 14px;
+            background: #161b22;
+            border: 1px solid var(--olympus-border);
+            color: var(--olympus-text);
+            font-size: 16px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: 0.2s;
+        }
+        .btn-search-header:active { transform: scale(0.9); border-color: var(--olympus-primary); }
+        .btn-masuk-top { padding: 12px 24px; border-radius: 14px; background: var(--olympus-primary); border: none; color: white; font-weight: 800; font-size: 13px; cursor: pointer; box-shadow: 0 8px 20px rgba(47, 129, 247, 0.3); transition: 0.3s; height: 42px; display: flex; align-items: center; }
+        .btn-masuk-top:active { transform: scale(0.9); }
+
+        /* 🔥 LACI PENCARIAN SLIDE DOWN / UP */
+        .search-drawer {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px 15px 20px;
+            display: none;
+            overflow: hidden;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .search-drawer.show {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            animation: drawerSlideDown 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        }
+        @keyframes drawerSlideDown {
+            from { opacity: 0; transform: translateY(-15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .search-container { position: relative; flex: 1; }
+        .search-input { 
+            width: 100%; padding: 14px 16px 14px 45px; border-radius: 16px; 
+            background: #161b22; border: 1px solid var(--olympus-border); 
+            color: white; font-size: 14px; outline: none; transition: 0.3s;
+        }
+        .search-input:focus { border-color: var(--olympus-primary); background: #010409; }
+        .s-icon { position: absolute; left: 16px; top: 50%; transform: translateY(-50%); color: var(--olympus-sub); font-size: 16px; }
+        .btn-close-search {
+            color: var(--olympus-sub); font-size: 14px; font-weight: 700; cursor: pointer; padding: 10px 4px; white-space: nowrap; transition: color 0.2s;
+        }
+        .btn-close-search:hover { color: white; }
+
+        /* --- TAB CATEGORY --- */
+        .tabs-wrap { display: flex; gap: 12px; padding: 20px 20px 25px; overflow-x: auto; max-width: 600px; margin: 0 auto; }
+        .tab-item { 
+            padding: 14px 26px; background: var(--olympus-card); border-radius: 50px; 
+            border: 1px solid var(--olympus-border); color: var(--olympus-sub); font-size: 12px; font-weight: 800;
+            white-space: nowrap; cursor: pointer; transition: 0.3s;
+        }
+        .tab-item.active { background: var(--olympus-primary); color: white; border-color: var(--olympus-primary); box-shadow: 0 10px 20px rgba(0,0,0,0.3); }
+
+        /* --- GRID GAME --- */
+        .grid-container { padding: 0 20px; max-width: 600px; margin: 0 auto; transition: max-width 0.3s; }
+        .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+        .g-card { 
+            background: var(--olympus-card); border-radius: 20px; padding: 12px; 
+            text-align: center; text-decoration: none; color: inherit; border: 1px solid var(--olympus-border);
+            transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); display: block;
+        }
+        .g-card:hover { border-color: var(--olympus-primary); transform: translateY(-2px); }
+        .g-card:active { transform: scale(0.85); }
+        .g-card img { width: 100%; aspect-ratio: 1/1; border-radius: 16px; margin-bottom: 10px; object-fit: cover; background: #161b22; }
+        .g-card span { font-size: 11px; font-weight: 800; display: block; height: 32px; overflow: hidden; line-height: 1.2; color: var(--olympus-text); }
+
+        /* --- PROFILE GUEST PAGE --- */
+        #page-acc { display: none; padding: 35px 20px; max-width: 600px; margin: 0 auto; }
+        .guest-box { background: var(--olympus-card); padding: 50px 25px; border-radius: 30px; border: 1px solid var(--olympus-border); text-align: center; box-shadow: var(--shadow-titan); }
+        .guest-avatar { width: 100px; height: 100px; background: #161b22; border-radius: 50%; margin: 0 auto 25px; display: flex; align-items: center; justify-content: center; font-size: 50px; border: 2px solid var(--olympus-border); }
+        .guest-box h2 { font-size: 24px; font-weight: 900; margin-bottom: 10px; color: white; }
+        .guest-box p { font-size: 14px; color: var(--olympus-sub); margin-bottom: 35px; }
+        
+        .btn-full { width: 100%; padding: 18px; border-radius: 16px; font-weight: 800; font-size: 16px; cursor: pointer; border: none; margin-bottom: 15px; transition: 0.3s; text-align: center; }
+        .b-blue { background: var(--olympus-primary); color: white; }
+        .b-outline { background: transparent; color: white; border: 1px solid var(--olympus-border); }
+
+        /* --- SOCIAL LOGIN --- */
+        .social-container { display: flex; flex-direction: column; gap: 12px; margin-bottom: 25px; }
+        .social-btn { 
+            width: 100%; padding: 16px; border-radius: 14px; display: flex; align-items: center; 
+            justify-content: center; gap: 12px; font-weight: 700; font-size: 14px; border: 1px solid var(--olympus-border);
+            cursor: pointer; transition: 0.3s;
+        }
+        .s-google { background: white; color: black; }
+        .s-fb { background: #1877f2; color: white; border: none; }
+        .s-apple { background: black; color: white; border: none; }
+        .social-btn img { width: 20px; height: 20px; object-fit: contain; }
+
+        /* --- MODAL SYSTEM --- */
+        .modal-overlay { 
+            position: fixed; inset: 0; background: rgba(1, 4, 9, 0.85); z-index: 2000; 
+            display: none; justify-content: center; align-items: flex-end; backdrop-filter: blur(20px);
+            opacity: 0; transition: opacity 0.3s ease;
+        }
+        .titan-sheet { 
+            background: var(--olympus-card); width: 100%; max-width: 550px; border-radius: 35px 35px 0 0; 
+            padding: 45px 30px; border-top: 1px solid var(--olympus-border);
+            transform: translateY(100%); transition: transform 0.4s cubic-bezier(0.1, 1, 0.1, 1);
+            max-height: 90vh; overflow-y: auto; position: relative;
+        }
+        .close-x { position: absolute; right: 30px; top: 30px; font-size: 35px; color: var(--olympus-sub); cursor: pointer; line-height: 1; }
+        
+        .form-group { margin-bottom: 22px; text-align: left; }
+        .form-group label { display: block; font-size: 11px; font-weight: 800; color: var(--olympus-sub); margin-bottom: 10px; text-transform: uppercase; letter-spacing: 1.5px; }
+        .form-group input { width: 100%; padding: 18px; border-radius: 15px; border: 1px solid var(--olympus-border); background: #161b22; color: white; outline: none; font-size: 15px; }
+        .form-group input:focus { border-color: var(--olympus-primary); }
+
+        .divider { display: flex; align-items: center; gap: 15px; margin: 30px 0; color: var(--olympus-sub); font-size: 11px; font-weight: 800; }
+        .divider::before, .divider::after { content: ""; flex: 1; height: 1px; background: var(--olympus-border); }
+
+        /* --- BOTTOM NAV --- */
+        .bot-nav { 
+            position: fixed; bottom: 0; left: 50%; transform: translateX(-50%); width: 100%; max-width: 600px; height: 90px; background: rgba(13, 17, 23, 0.98); 
+            border-top: 1px solid var(--olympus-border); display: flex; justify-content: space-around; align-items: center; z-index: 1000; transition: max-width 0.3s;
+        }
+        .n-item { text-decoration: none; color: var(--olympus-sub); text-align: center; font-size: 10px; font-weight: 900; flex: 1; cursor: pointer; transition: 0.3s; }
+        .n-item.active { color: var(--olympus-primary); }
+        .n-item i { font-size: 26px; display: block; margin-bottom: 6px; font-style: normal; }
+
+        #no-result { display: none; text-align: center; padding: 120px 20px; color: var(--olympus-sub); font-weight: 900; grid-column: 1/-1; }
+
+        /* 🚀 OPTIMASI SEPESIFIK UNTUK KOMPUTER & LAPTOP (RESPONSIVE VIEW) */
+        @media (min-width: 768px) {
+            body { padding-bottom: 120px; } /* Memberi ruang di bawah agar konten tidak tertutup bot-nav laptop */
+            .banner-slider { max-width: 100%; height: 280px; margin: 30px 0; }
+            .banner-item { height: 280px; border-radius: 30px; }
+            .banner-content h2 { font-size: 28px; }
+            .tabs-wrap { max-width: 100%; justify-content: center; overflow: hidden; padding: 10px 0 30px 0; }
+            .grid-container { max-width: 100%; }
+            .grid { grid-template-columns: repeat(6, 1fr); gap: 20px; } /* Menjadi 6 Kolom di Laptop */
+            .g-card span { font-size: 13px; }
+            #page-acc { max-width: 100%; display: none; grid-template-columns: 1fr 1fr; gap: 30px; align-items: start; }
+            
+            /* 🔥 Navigasi bawah tetap tampil di laptop dengan posisi proporsional mengikuti lebar main wrapper */
+            .bot-nav { 
+                position: fixed; 
+                bottom: 20px; 
+                left: 50%; 
+                transform: translateX(-50%); 
+                max-width: 600px; 
+                border: 1px solid var(--olympus-border); 
+                border-radius: 25px; 
+                height: 85px; 
+                display: flex; 
+                box-shadow: var(--shadow-titan);
+                background: rgba(13, 17, 23, 0.95);
+                backdrop-filter: blur(10px);
+            }
+            
+            .modal-overlay { align-items: center; }
+            .titan-sheet { border-radius: 30px; border: 1px solid var(--olympus-border); }
+        }
+
+        /* --- HIGH CAPACITY CAPACITY BOOSTER EXTRA PACK --- */
+        .auth-view { transition: opacity 0.25s ease-in-out, transform 0.25s ease-in-out; }
+        @keyframes olympusGlow { 0% { box-shadow: 0 0 5px rgba(47,129,247,0.2); } 50% { box-shadow: 0 0 25px rgba(47,129,247,0.6); } 100% { box-shadow: 0 0 5px rgba(47,129,247,0.2); } }
+        .btn-full.b-blue { animation: olympusGlow 4s infinite ease-in-out; }
+        .titan-heavy-chunk-01, .titan-heavy-chunk-02 { display: none; visibility: hidden; }
+        .titan-heavy-layer-alpha { background-size: 100% 100%; }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+</head>
+<body>
+
+    <div class="header-container titan-heavy-layer-alpha">
+        <header>
+            <div class="h-wrap">
+                <div class="h-top">
+                    <div class="logo-titan">ARYA STORE</div>
+                    <div class="h-actions">
+                        <button class="btn-search-header" id="openSearchBtn">🔍</button>
+                        <button class="btn-masuk-top" id="btnAuthHeader">MASUK</button>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <div class="search-drawer" id="searchDrawer">
+            <div class="search-container">
+                <span class="s-icon">🔍</span>
+                <input type="text" id="searchMain" class="search-input" placeholder="Cari di antara 150+ produk titan...">
+            </div>
+            <span class="btn-close-search" id="closeSearchBtn">Batal</span>
+        </div>
+    </div>
+
+    <div class="main-wrapper">
+        
+        <div id="page-home">
+            <div class="banner-slider" id="bannerSlider">
+                <div class="banner-track" id="bannerTrack">
+                    <div class="banner-item" onclick="alert('Masuk MLBB')">
+                        <img src="banner1.jpg" alt="Banner 1">
+                        <div class="banner-content">
+                            <h2>TOP UP MLBB TERMURAH</h2>
+                            <button>BELI SEKARANG</button>
+                        </div>
+                    </div>
+                    <div class="banner-item" onclick="alert('Masuk FF')">
+                        <img src="banner2.jpg" alt="Banner 2">
+                        <div class="banner-content">
+                            <h2>FREE FIRE AUTO MURAH</h2>
+                            <button>TOP UP</button>
+                        </div>
+                    </div>
+                    <div class="banner-item" onclick="alert('Masuk PUBG')">
+                        <img src="banner3.jpg" alt="Banner 3">
+                        <div class="banner-content">
+                            <h2>PUBG UC CEPAT</h2>
+                            <button>BELI</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="banner-dots" id="bannerDots">
+                    <span class="dot active"></span>
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                </div>
+            </div>
+
+            <div class="tabs-wrap">
+                <div class="tab-item active" data-f="all">SEMUA</div>
+                <div class="tab-item" data-f="populer">POPULER</div>
+                <div class="tab-item" data-f="mobile">MOBILE</div>
+                <div class="tab-item" data-f="pc">PC</div>
+                <div class="tab-item" data-f="app">APP</div>
+            </div>
+
+            <div class="grid-container">
+                <div class="grid" id="mainGrid">
+                    <a href="mlbb.html" class="g-card" data-n="Mobile Legends" data-c="mobile populer">
+                        <img src="logoml.jpg"><span>Mobile Legends</span>
+                    </a>
+                    <a href="#" class="g-card" data-n="Free Fire" data-c="mobile populer">
+                        <img src="logoff.jpg"><span>Free Fire</span>
+                    </a>
+                    <a href="#" class="g-card" data-n="Honor of Kings" data-c="mobile populer">
+                        <img src="logohok.jpg"><span>Honor of Kings</span>
+                    </a>
+                    <a href="#" class="g-card" data-n="Genshin Impact" data-c="mobile pc">
+                        <img src="logogi.jpg"><span>Genshin Impact</span>
+                    </a>
+                    <a href="#" class="g-card" data-n="PUBG Mobile" data-c="mobile populer">
+                        <img src="logopubg.jpg"><span>PUBG Mobile</span>
+                    </a>
+                    <a href="#" class="g-card" data-n="Valorant" data-c="pc populer">
+                        <img src="logovalo.jpg"><span>Valorant</span>
+                    </a>
+                    <a href="#" class="g-card" data-n="Roblox" data-c="mobile pc">
+                        <img src="logoroblox.jpg"><span>Roblox</span>
+                    </a>
+                    <a href="#" class="g-card" data-n="Point Blank" data-c="pc">
+                        <img src="logopb.jpg"><span>Point Blank</span>
+                    </a>
+                    <a href="#" class="g-card" data-n="Call of Duty" data-c="mobile">
+                        <img src="logocod.jpg"><span>Call of Duty</span>
+                    </a>
+                    
+                    <div id="more-container" style="grid-column: 1 / -1; text-align: center; margin: 20px 0;">
+                        <button id="btnMore" class="btn-full b-outline" style="width: auto; padding: 12px 40px; border-radius: 50px;">
+                            Lihat Lebih Banyak ▾
+                        </button>
+                    </div>
+
+                    <a href="#" class="g-card" data-n="Netflix Premium" data-c="app">
+                        <img src="logonetflix.jpg"><span>Netflix</span>
+                    </a>
+                    <a href="#" class="g-card" data-n="YouTube Premium" data-c="app">
+                        <img src="logoyt.jpg"><span>YouTube Premium</span>
+                    </a>
+                    <a href="#" class="g-card" data-n="Spotify Premium" data-c="app">
+                        <img src="logospotify.jpg"><span>Spotify</span>
+                    </a>
+                    <a href="#" class="g-card" data-n="Disney Plus" data-c="app">
+                        <img src="logodisney.jpg"><span>Disney+</span>
+                    </a>
+                    <a href="#" class="g-card" data-n="Vidio" data-c="app">
+                        <img src="logovidio.jpg"><span>Vidio.com</span>
+                    </a>
+                    <a href="#" class="g-card" data-n="Canva Pro" data-c="app">
+                        <img src="logocanva.jpg"><span>Canva Pro</span>
+                    </a>
+                    <a href="#" class="g-card" data-n="Steam Wallet" data-c="pc">
+                        <img src="logosteam.jpg"><span>Steam Wallet</span>
+                    </a>
+                    <a href="#" class="g-card" data-n="Playstation Network" data-c="pc">
+                        <img src="logopsn.jpg"><span>PSN Card</span>
+                    </a>
+                    <a href="#" class="g-card" data-n="Xbox Live" data-c="pc">
+                        <img src="logoxbox.jpg"><span>Xbox Card</span>
+                    </a>
+                    <a href="#" class="g-card" data-n="Clash of Clans" data-c="mobile">
+                        <img src="gambar/coc.jpg"><span>Clash of Clans</span>
+                    </a>
+                    <a href="#" class="g-card" data-n="Clash Royale" data-c="mobile">
+                        <img src="gambar/cr.jpg"><span>Clash Royale</span>
+                    </a>
+                    <a href="#" class="g-card" data-n="Stumble Guys" data-c="mobile">
+                        <img src="gambar/stumble.jpg"><span>Stumble Guys</span>
+                    </a>
+                    <a href="#" class="g-card" data-n="8 Ball Pool" data-c="mobile">
+                        <img src="gambar/8ball.jpg"><span>8 Ball Pool</span>
+                    </a>
+                    <a href="#" class="g-card" data-n="Honkai Star Rail" data-c="mobile pc">
+                        <img src="gambar/hsr.jpg"><span>Honkai Star Rail</span>
+                    </a>
+                    <a href="#" class="g-card" data-n="Tower of Fantasy" data-c="mobile pc">
+                        <img src="gambar/tof.jpg"><span>Tower of Fantasy</span>
+                    </a>
+                    <a href="#" class="g-card" data-n="NIKKE" data-c="mobile">
+                        <img src="gambar/nikke.jpg"><span>NIKKE</span>
+                    </a>
+                    <a href="#" class="g-card" data-n="Blue Archive" data-c="mobile">
+                        <img src="gambar/ba.jpg"><span>Blue Archive</span>
+                    </a>
+                    <a href="#" class="g-card" data-n="Arknights" data-c="mobile">
+                        <img src="gambar/ark.jpg"><span>Arknights</span>
+                    </a>
+                    <a href="#" class="g-card" data-n="Harry Potter" data-c="mobile">
+                        <img src="gambar/hp.jpg"><span>Harry Potter</span>
+                    </a>
+                    <a href="#" class="g-card" data-n="Undawn" data-c="mobile pc">
+                        <img src="gambar/undawn.jpg"><span>Undawn</span>
+                    </a>
+                    <a href="#" class="g-card" data-n="LifeAfter" data-c="mobile">
+                        <img src="gambar/la.jpg"><span>LifeAfter</span>
+                    </a>
+                    <a href="#" class="g-card" data-n="Garena Shells" data-c="app">
+                        <img src="gambar/garena.jpg"><span>Garena Shells</span>
+                    </a>
+                    <a href="#" class="g-card" data-n="Unipin Voucher" data-c="app">
+                        <img src="gambar/unipin.jpg"><span>Unipin Voucher</span>
+                    </a>
+                    <a href="#" class="g-card" data-n="Razer Gold" data-c="app">
+                        <img src="gambar/razer.jpg"><span>Razer Gold</span>
+                    </a>
+                    <a href="#" class="g-card" data-n="Google Play" data-c="app">
+                        <img src="gambar/google.jpg"><span>Google Play</span>
+                    </a>
+                    <a href="#" class="g-card" data-n="Apple Gift Card" data-c="app">
+                        <img src="gambar/apple.jpg"><span>Apple Card</span>
+                    </a>
+                    <a href="#" class="g-card" data-n="Minecraft" data-c="mobile pc">
+                        <img src="gambar/mc.jpg"><span>Minecraft</span>
+                    </a>
+                    <a href="#" class="g-card" data-n="Terraria" data-c="mobile pc">
+                        <img src="gambar/terraria.jpg"><span>Terraria</span>
+                    </a>
+                    <a href="#" class="g-card" data-n="Ragnarok Origin" data-c="mobile">
+                        <img src="gambar/ro.jpg"><span>Ragnarok Origin</span>
+                    </a>
+                    <a href="#" class="g-card" data-n="Ragnarok M" data-c="mobile">
+                        <img src="gambar/rom.jpg"><span>Ragnarok M</span>
+                    </a>
+                    <a href="#" class="g-card" data-n="Apex Legends" data-c="pc">
+                        <img src="gambar/apex.jpg"><span>Apex Legends</span>
+                    </a>
+                    <a href="#" class="g-card" data-n="FIFA Mobile" data-c="mobile">
+                        <img src="gambar/fifa.jpg"><span>FIFA Mobile</span>
+                    </a>
+                    <a href="#" class="g-card" data-n="Efootball" data-c="mobile pc">
+                        <img src="gambar/efootball.jpg"><span>Efootball 2024</span>
+                    </a>
+                    <a href="#" class="g-card" data-n="Top Eleven" data-c="mobile">
+                        <img src="gambar/top11.jpg"><span>Top Eleven</span>
+                    </a>
+                    <a href="#" class="g-card" data-n="Brawl Stars" data-c="mobile">
+                        <img src="gambar/brawl.jpg"><span>Brawl Stars</span>
+                    </a>
+                    <a href="#" class="g-card" data-n="Hay Day" data-c="mobile">
+                        <img src="gambar/hayday.jpg"><span>Hay Day</span>
+                    </a>
+                    <a href="#" class="g-card" data-n="League of Legends" data-c="pc">
+                        <img src="gambar/lol.jpg"><span>LOL PC</span>
+                    </a>
+                    <a href="#" class="g-card" data-n="Dota 2" data-c="pc">
+                        <img src="gambar/dota.jpg"><span>Dota 2</span>
+                    </a>
+                    <a href="#" class="g-card" data-n="Counter Strike" data-c="pc">
+                        <img src="gambar/cs.jpg"><span>CS2</span>
+                    </a>
+                    <a href="#" class="g-card" data-n="Arena of Valor" data-c="mobile">
+                        <img src="gambar/aov.jpg"><span>Arena of Valor</span>
+                    </a>
+                    <a href="#" class="g-card" data-n="Speed Drifters" data-c="mobile">
+                        <img src="gambar/speed.jpg"><span>Speed Drifters</span>
+                    </a>
+                    <a href="#" class="g-card" data-n="Marvel Super War" data-c="mobile">
+                        <img src="gambar/marvel.jpg"><span>Marvel Super War</span>
+                    </a>
+                    <a href="#" class="g-card" data-n="Crisis Action" data-c="mobile">
+                        <img src="gambar/crisis.jpg"><span>Crisis Action</span>
+                    </a>
+                    <a href="#" class="g-card" data-n="Metal Slug" data-c="mobile">
+                        <img src="gambar/metalslug.jpg"><span>Metal Slug</span>
+                    </a>
+                    <a href="#" class="g-card" data-n="Dragon Nest" data-c="mobile">
+                        <img src="gambar/dn.jpg"><span>Dragon Nest M</span>
+                    </a>
+                    <a href="#" class="g-card" data-n="Tinder Gold" data-c="app">
+                        <img src="gambar/tinder.jpg"><span>Tinder Gold</span>
+                    </a>
+                    <a href="#" class="g-card" data-n="Badoo Premium" data-c="app">
+                        <img src="gambar/badoo.jpg"><span>Badoo Premium</span>
+                    </a>
+                    <a href="#" class="g-card" data-n="Bumble Boost" data-c="app">
+                        <img src="gambar/bumble.jpg"><span>Bumble Boost</span>
+                    </a>
+                    <a href="#" class="g-card" data-n="OkCupid" data-c="app">
+                        <img src="gambar/okc.jpg"><span>OkCupid</span>
+                    </a>
+                    <a href="#" class="g-card" data-n="Crunchyroll" data-c="app">
+                        <img src="gambar/crunchy.jpg"><span>Crunchyroll</span>
+                    </a>
+                    <a href="#" class="g-card" data-n="HBO Go" data-c="app">
+                        <img src="gambar/hbo.jpg"><span>HBO Go</span>
+                    </a>
+                    <a href="#" class="g-card" data-n="Prime Video" data-c="app">
+                        <img src="gambar/amazon.jpg"><span>Prime Video</span>
+                    </a>
+                    <a href="#" class="g-card" data-n="WeTV VIP" data-c="app">
+                        <img src="gambar/wetv.jpg"><span>WeTV VIP</span>
+                    </a>
+                    <a href="#" class="g-card" data-n="iQIYI VIP" data-c="app">
+                        <img src="gambar/iqiyi.jpg"><span>iQIYI VIP</span>
+                    </a>
+                    <a href="#" class="g-card" data-n="Telegram Premium" data-c="app">
+                        <img src="gambar/tele.jpg"><span>Telegram Premium</span>
+                    </a>
+                    <a href="#" class="g-card" data-n="Discord Nitro" data-c="app">
+                        <img src="gambar/discord.jpg"><span>Discord Nitro</span>
+                    </a>
+                    <a href="#" class="g-card" data-n="ChatGPT Plus" data-c="app">
+                        <img src="gambar/gpt.jpg"><span>ChatGPT Plus</span>
+                    </a>
+                    <a href="#" class="g-card" data-n="Capcut Pro" data-c="app">
+                        <img src="gambar/capcut.jpg"><span>Capcut Pro</span>
+                    </a>
+                    <a href="#" class="g-card" data-n="Lightroom Pro" data-c="app">
+                        <img src="gambar/lr.jpg"><span>Lightroom Pro</span>
+                    </a>
+                    <a href="#" class="g-card" data-n="Picsart Gold" data-c="app">
+                        <img src="gambar/picsart.jpg"><span>Picsart Gold</span>
+                    </a>
+                    <a href="#" class="g-card" data-n="Remini Pro" data-c="app">
+                        <img src="gambar/remini.jpg"><span>Remini Pro</span>
+                    </a>
+                    <div id="no-result">Game tidak ditemukan 🔍</div>
+                </div>
+            </div>
+        </div>
+
+        <div id="page-acc">
+            <div class="guest-box">
+                <div class="guest-avatar">👤</div>
+                <h2>Guest Mode</h2>
+                <p>Silahkan login untuk mengakses riwayat transaksi, promo eksklusif, dan penawaran khusus member.</p>
+                <button class="btn-full b-blue" id="btnMasukAcc">MASUK AKUN</button>
+                <button class="btn-full b-outline" id="btnDaftarAcc">DAFTAR BARU</button>
+            </div>
+            <div style="margin-top: 30px; width: 100%;">
+                <p style="font-size: 11px; color: var(--olympus-sub); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 15px; font-weight: 800;">Informasi Titan</p>
+                <div style="background: var(--olympus-card); border-radius: 20px; border: 1px solid var(--olympus-border); overflow: hidden;">
+                    <div style="padding: 20px; border-bottom: 1px solid var(--olympus-border); display: flex; justify-content: space-between; font-weight: 700; font-size: 14px; cursor: pointer;">Bantuan Layanan <i>›</i></div>
+                    <div style="padding: 20px; border-bottom: 1px solid var(--olympus-border); display: flex; justify-content: space-between; font-weight: 700; font-size: 14px; cursor: pointer;">Syarat Penggunaan <i>›</i></div>
+                    <div style="padding: 20px; display: flex; justify-content: space-between; font-weight: 700; font-size: 14px; cursor: pointer;">Tentang Arya Store <i>›</i></div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+
+    <div class="modal-overlay" id="authModal">
+        <div class="titan-sheet" id="titanSheet">
+            <span class="close-x" id="closeModal">&times;</span>
+            
+            <div id="v-login" class="auth-view">
+                <div style="text-align: center; margin-bottom: 30px;">
+                    <h2 style="font-weight: 900; font-size: 24px; color: white;">Selamat Datang</h2>
+                    <p style="font-size: 13px; color: var(--olympus-sub);">Masuk ke akun Arya Store Titan Anda.</p>
+                </div>
+
+                <div class="social-container">
+                    <button class="social-btn s-google">
+                        <img src="https://www.gstatic.com/images/branding/product/1x/gsa_512dp.png" alt="Google"> Masuk dengan Google
+                    </button>
+                    <button class="social-btn s-fb">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/0/05/Facebook_Logo_2023.png" alt="FB"> Masuk dengan Facebook
+                    </button>
+                    <button class="social-btn s-apple">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/3/31/Apple_logo_white.svg" alt="Apple"> Masuk dengan Apple
+                    </button>
+                </div>
+
+                <div class="divider">ATAU EMAIL</div>
+
+                <div class="form-group"><label>Alamat Email</label><input type="email" placeholder="nama@email.com"></div>
+                <div class="form-group"><label>Kata Sandi</label><input type="password" placeholder="••••••••"></div>
+                <p style="text-align: right; font-size: 12px; color: var(--olympus-primary); font-weight: 800; cursor: pointer; margin-bottom: 25px;" id="goForgot">Lupa Sandi?</p>
+                <button class="btn-full b-blue">MASUK SEKARANG</button>
+                <p style="text-align: center; font-size: 13px; margin-top: 25px; color: white;">Baru di Titan? <span id="goReg" style="color: var(--olympus-primary); font-weight: 800; cursor: pointer;">Daftar</span></p>
+            </div>
+
+            <div id="v-reg" class="auth-view" style="display:none">
+                <div style="text-align: center; margin-bottom: 30px;">
+                    <h2 style="font-weight: 900; font-size: 24px; color: white;">Daftar Akun</h2>
+                    <p style="font-size: 13px; color: var(--olympus-sub);">Nikmati harga member paling murah.</p>
+                </div>
+                <div class="form-group"><label>Nama Lengkap</label><input type="text" placeholder="Masukkan nama"></div>
+                <div class="form-group"><label>Email Aktif</label><input type="email" placeholder="nama@email.com"></div>
+                <div class="form-group"><label>Password Baru</label><input type="password" placeholder="Minimal 6 karakter"></div>
+                <button class="btn-full b-blue">DAFTAR TITAN</button>
+                <p style="text-align: center; font-size: 13px; margin-top: 25px; color: white;">Sudah punya akun? <span id="goLogin" style="color: var(--olympus-primary); font-weight: 800; cursor: pointer;">Masuk</span></p>
+            </div>
+
+            <div id="v-forgot" class="auth-view" style="display:none">
+                <div style="text-align: center; margin-bottom: 30px;">
+                    <h2 style="font-weight: 900; font-size: 24px; color: white;">Lupa Password</h2>
+                    <p style="font-size: 13px; color: var(--olympus-sub);">Kami akan mengirim kode OTP ke email anda.</p>
+                </div>
+                <div class="form-group"><label>Email Pemulihan</label><input type="email" id="forgotMail" placeholder="nama@email.com"></div>
+                <button class="btn-full b-blue" id="btnOtp">KIRIM OTP</button>
+                <div id="otpBox" style="display:none; margin-top: 30px; text-align: center;">
+                    <p style="font-size: 11px; margin-bottom: 15px; font-weight: 800; color: white;">MASUKAN KODE OTP:</p>
+                    <input type="text" maxlength="4" style="width: 160px; padding: 12px; font-size: 28px; text-align: center; letter-spacing: 12px; border: 2px solid var(--olympus-primary); border-radius: 15px; background: #161b22; color: white; outline: none;">
+                </div>
+                <p style="text-align: center; font-size: 13px; margin-top: 25px; color: white;"><span id="backToLogin" style="color: var(--olympus-primary); font-weight: 800; cursor: pointer;">Kembali ke Login</span></p>
+            </div>
+        </div>
+    </div>
+
+    <nav class="bot-nav" id="bottomNav">
+        <a class="n-item active" id="navHome"><i>🏠</i>BERANDA</a>
+        <a class="n-item" id="navHistory"><i>📋</i>RIWAYAT</a>
+        <a class="n-item" id="navAccount"><i>👤</i>AKUN</a>
+    </nav>
+
+    <script>
+    // -- BANNER SLIDER SYSTEM DENGAN SWIPE & AUTOMATIC 1 DETIK --
+    const track = document.getElementById('bannerTrack');
+    const slider = document.getElementById('bannerSlider');
+    const items = document.querySelectorAll('.banner-item');
+    const dots = document.querySelectorAll('.dot');
+    let bIdx = 0;
+    let autoSlide;
+
+    let isDragging = false;
+    let startX, currentX;
+    let startTranslate = 0;
+    let currentTranslate = 0;
+
+    function updateSlider() {
+        if(!track || !dots.length) return;
+        track.style.transition = "transform 0.3s cubic-bezier(0.25, 1, 0.5, 1)";
+        track.style.transform = `translateX(-${bIdx * 100}%)`;
+        dots.forEach(d => d.classList.remove('active'));
+        dots[bIdx].classList.add('active');
+        startTranslate = -bIdx * slider.clientWidth;
+    }
+
+    function startAutoSlide() {
+        stopAutoSlide();
+        autoSlide = setInterval(() => {
+            bIdx = (bIdx + 1) % items.length;
+            updateSlider();
+        }, 1000);
+    }
+
+    function stopAutoSlide() {
+        if (autoSlide) clearInterval(autoSlide);
+    }
+
+    if(slider && track) {
+        slider.addEventListener('touchstart', dragStart);
+        slider.addEventListener('touchend', dragEnd);
+        slider.addEventListener('touchmove', dragMove);
+
+        slider.addEventListener('mousedown', dragStart);
+        slider.addEventListener('mouseup', dragEnd);
+        slider.addEventListener('mouseleave', dragEnd);
+        slider.addEventListener('mousemove', dragMove);
+    }
+
+    function dragStart(e) {
+        stopAutoSlide();
+        isDragging = true;
+        startX = e.type.includes('mouse') ? e.pageX : e.touches[0].clientX;
+        track.style.transition = 'none';
+    }
+
+    function dragMove(e) {
+        if (!isDragging) return;
+        currentX = e.type.includes('mouse') ? e.pageX : e.touches[0].clientX;
+        const diffX = currentX - startX;
+        currentTranslate = startTranslate + diffX;
+        track.style.transform = `translateX(${currentTranslate}px)`;
+    }
+
+    function dragEnd() {
+        if (!isDragging) return;
+        isDragging = false;
+        const movedBy = currentTranslate - startTranslate;
+
+        if (movedBy < -50 && bIdx < items.length - 1) {
+            bIdx++;
+        } else if (movedBy > 50 && bIdx > 0) {
+            bIdx--;
+        }
+        updateSlider();
+        startAutoSlide();
+    }
+
+    dots.forEach((dot, index) => {
+        dot.onclick = () => {
+            bIdx = index;
+            updateSlider();
+            startAutoSlide();
+        };
+    });
+
+    startAutoSlide();
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const search = document.getElementById('searchMain');
+        const cards = document.querySelectorAll('.g-card');
+        const tabs = document.querySelectorAll('.tab-item');
+        const homePage = document.getElementById('page-home');
+        const accPage = document.getElementById('page-acc');
+        const navs = document.querySelectorAll('.n-item');
+        const modal = document.getElementById('authModal');
+        const sheet = document.getElementById('titanSheet');
+        const btnMore = document.getElementById('btnMore');
+        const moreContainer = document.getElementById('more-container');
+        const bottomNav = document.getElementById('bottomNav');
+        
+        const views = { 
+            login: document.getElementById('v-login'), 
+            reg: document.getElementById('v-reg'), 
+            forgot: document.getElementById('v-forgot') 
+        };
+
+        const searchDrawer = document.getElementById('searchDrawer');
+        const openSearchBtn = document.getElementById('openSearchBtn');
+        const closeSearchBtn = document.getElementById('closeSearchBtn');
+
+        let isExpanded = false; 
+        const defaultLimit = 9; 
+
+        const runFilter = () => {
+            const q = search.value.toLowerCase().trim();
+            const activeTab = document.querySelector('.tab-item.active');
+            const f = activeTab ? activeTab.dataset.f : 'all';
+            let totalMatch = 0;
+            let visibleCount = 0;
+
+            cards.forEach(card => {
+                if (card === moreContainer) return;
+
+                const name = card.dataset.n.toLowerCase();
+                const cat = card.dataset.c || '';
+                const qMatch = name.includes(q);
+                const fMatch = f === 'all' || cat.includes(f);
+
+                if(qMatch && fMatch) {
+                    totalMatch++;
+                    if (isExpanded || visibleCount < defaultLimit) {
+                        card.style.display = 'block';
+                        visibleCount++;
+                    } else {
+                        card.style.display = 'none';
+                    }
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+
+            if (moreContainer) {
+                moreContainer.style.display = (totalMatch > defaultLimit) ? 'block' : 'none';
+                if(btnMore) btnMore.innerHTML = isExpanded ? 'Lihat Lebih Sedikit ▴' : 'Lihat Lebih Banyak ▾';
+            }
+            const noRes = document.getElementById('no-result');
+            if(noRes) noRes.style.display = totalMatch === 0 ? 'block' : 'none';
+        };
+
+        if (btnMore) {
+            btnMore.onclick = () => {
+                isExpanded = !isExpanded;
+                runFilter();
+                if (!isExpanded) { window.scrollTo({ top: 350, behavior: 'smooth' }); }
+            };
+        }
+
+        search.addEventListener('input', () => { isExpanded = false; runFilter(); });
+        
+        tabs.forEach(t => {
+            t.onclick = () => {
+                tabs.forEach(x => x.classList.remove('active'));
+                t.classList.add('active');
+                isExpanded = false; 
+                runFilter();
+            };
+        });
+
+        const showPage = (target, nav) => {
+            homePage.style.display = 'none'; 
+            accPage.style.display = 'none';
+            if (window.innerWidth >= 768 && target === accPage) {
+                target.style.display = 'grid'; 
+            } else {
+                target.style.display = 'block';
+            }
+            navs.forEach(n => n.classList.remove('active'));
+            nav.classList.add('active');
+            window.scrollTo(0,0);
+        };
+
+        document.getElementById('navHome').onclick = (e) => showPage(homePage, e.currentTarget);
+        document.getElementById('navAccount').onclick = (e) => showPage(accPage, e.currentTarget);
+        document.getElementById('navHistory').onclick = (e) => {
+            navs.forEach(n => n.classList.remove('active'));
+            e.currentTarget.classList.add('active');
+            openAuth('login');
+        };
+
+        /* 🔥 Menghapus baris pemblokir tampilan bot-nav laptop terdahulu agar navigasi tetap sinkron */
+
+        openSearchBtn.onclick = () => {
+            searchDrawer.style.display = 'flex';
+            setTimeout(() => {
+                searchDrawer.classList.add('show');
+                search.focus();
+            }, 10);
+        };
+
+        const closeSearchPanel = () => {
+            searchDrawer.classList.remove('show');
+            search.value = ''; 
+            setTimeout(() => {
+                searchDrawer.style.display = 'none';
+                runFilter();
+            }, 300);
+        };
+
+        closeSearchBtn.onclick = closeSearchPanel;
+
+        const openAuth = (targetView) => {
+            Object.keys(views).forEach(v => { 
+                if(views[v]) {
+                    views[v].style.display = (v === targetView) ? 'block' : 'none'; 
+                    views[v].style.opacity = '1';
+                }
+            });
+            modal.style.display = 'flex';
+            setTimeout(() => {
+                modal.style.opacity = '1';
+                sheet.style.transform = 'translateY(0)';
+            }, 10);
+        };
+
+        const closeAuth = () => {
+            modal.style.opacity = '0';
+            sheet.style.transform = window.innerWidth >= 768 ? 'translateY(0)' : 'translateY(100%)';
+            setTimeout(() => { modal.style.display = 'none'; }, 400);
+        };
+
+        const switchAuthView = (nextView) => {
+            let currentView = null;
+            Object.keys(views).forEach(v => { if(views[v] && views[v].style.display === 'block') currentView = views[v]; });
+            if (currentView && currentView !== views[nextView]) {
+                currentView.style.opacity = '0';
+                setTimeout(() => {
+                    currentView.style.display = 'none';
+                    views[nextView].style.display = 'block';
+                    views[nextView].style.opacity = '1';
+                }, 200);
+            } else { openAuth(nextView); }
+        };
+
+        document.getElementById('btnAuthHeader').onclick = () => openAuth('login');
+        document.getElementById('btnMasukAcc').onclick = () => switchAuthView('login');
+        document.getElementById('btnDaftarAcc').onclick = () => switchAuthView('reg');
+        document.getElementById('goReg').onclick = () => switchAuthView('reg');
+        document.getElementById('goLogin').onclick = () => switchAuthView('login');
+        document.getElementById('goForgot').onclick = () => { switchAuthView('forgot'); document.getElementById('otpBox').style.display = 'none'; };
+        document.getElementById('backToLogin').onclick = () => switchAuthView('login');
+        document.getElementById('closeModal').onclick = () => closeAuth();
+        
+        window.onclick = (e) => { if(e.target == modal) closeAuth(); };
+
+        const otpBtn = document.getElementById('btnOtp');
+        if(otpBtn) {
+            otpBtn.onclick = function() {
+                const emailInput = document.getElementById('forgotMail').value;
+                const otpBox = document.getElementById('otpBox');
+                if (emailInput) {
+                    const generatedOTP = Math.floor(1000 + Math.random() * 9000);
+                    const templateParams = { to_email: emailInput, otp_code: generatedOTP };
+
+                    emailjs.send('service_557tu5j', 'template_91aC21', templateParams)
+                        .then(function() {
+                            otpBox.style.display = 'block';
+                            alert('OTP Olympus telah dikirim ke: ' + emailInput);
+                            window.generatedOTP = generatedOTP;
+                        }, function(error) {
+                            alert('Error: Cek koneksi atau ID EmailJS Anda.');
+                        });
+                } else {
+                    alert('Masukkan email pemulihan dulu ya!');
+                }
+            };
+        }
+
+        runFilter(); 
+    });
+
+    (function() { emailjs.init("VzbNNBhG5h76lEc2a"); })();
+    </script>
+</body>
+</html>
